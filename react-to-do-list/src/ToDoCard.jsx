@@ -3,6 +3,7 @@ import Icon from "@mdi/react";
 import { mdiDeleteOffOutline } from "@mdi/js";
 import { mdiPencilOutline } from "@mdi/js";
 
+import ListItem from "./ListItem";
 
 const ToDoCard = ({ toDo }) => {
   return (
@@ -14,7 +15,7 @@ const ToDoCard = ({ toDo }) => {
       <div>
         <ul>
           {toDo.list.map((item) => {
-            return <li key={item}>{item}</li>;
+            return <ListItem item={item} key={item} />;
           })}
         </ul>
       </div>
