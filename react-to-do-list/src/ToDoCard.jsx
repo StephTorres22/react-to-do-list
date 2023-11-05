@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import Icon from "@mdi/react";
 import { mdiDeleteOffOutline } from "@mdi/js";
-import { mdiPencilOutline } from "@mdi/js";
+import { mdiPencilOutline, mdiPlus } from "@mdi/js";
 
 import ListItem from "./ListItem";
 
-const ToDoCard = ({ toDo, handleDelete }) => {
+const ToDoCard = ({ toDo, handleDelete, handlePlusClick }) => {
   return (
     <div className="card">
       <div className="card__top">
@@ -14,6 +14,7 @@ const ToDoCard = ({ toDo, handleDelete }) => {
           path={mdiDeleteOffOutline}
           size={1}
           className="icon"
+          //need to have this like this so that the function is not called straight away!
           onClick={() => handleDelete(toDo.id)}
         />
       </div>
@@ -24,12 +25,15 @@ const ToDoCard = ({ toDo, handleDelete }) => {
           })}
         </ul>
       </div>
-      <Icon
-        path={mdiPencilOutline}
-        size={1}
-        style={{ position: "relative", left: "85%" }}
-        className="icon"
-      />
+      <div className="card__bottom">
+        <Icon
+          path={mdiPlus}
+          size={1.25}
+          className="icon"
+          onClick={handlePlusClick}
+        />
+        <Icon path={mdiPencilOutline} size={1} className="icon" />
+      </div>
     </div>
   );
 };

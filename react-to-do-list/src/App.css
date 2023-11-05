@@ -1,23 +1,24 @@
 .card-display {
-  padding-top: 2rem;
+  padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(5, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   justify-items: center;
   gap: 1rem;
 }
 
 .card {
-  min-width: 15rem;
-  max-height: 20rem;
+  width: 15rem;
+
   background-color: white;
   border-radius: 10px;
   padding: 0.5rem;
   margin-bottom: 2rem;
 }
 
-.card__top{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 .5rem;
+.card__top,
+.card__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
 }

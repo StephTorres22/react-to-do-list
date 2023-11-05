@@ -4,14 +4,16 @@ import ToDoCard from "./ToDoCard";
 import Icon from "@mdi/react";
 import { mdiPlusCircle } from "@mdi/js";
 import { useState } from "react";
-import ItemForm from "./ItemForm";
+import ListForm from "./ListForm";
 import { v4 as uuidv4 } from "uuid";
+import ItemForm from "./ItemForm";
 
 function App() {
   const intialToDo = { title: "", list: [], id: "" };
   const [toDoList, setToDoList] = useState([]);
   const [toDoItem, setToDoItem] = useState(intialToDo);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isListModalOpen, setIsListModalOpen] = useState(false);
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
 
   function hanldeTitleChange(e) {
     const updatedToDo = {
@@ -27,7 +29,7 @@ function App() {
     const updatedToDoList = toDoList.toSpliced(0, 0, toDoItem).reverse();
     setToDoList(updatedToDoList);
     setToDoItem(intialToDo);
-    setIsOpen(!isOpen);
+    setIsListModalOpen(!isListModalOpen);
   }
 
   function removeToDoList(id) {
@@ -45,6 +47,7 @@ function App() {
               toDo={item}
               key={item.id}
               handleDelete={removeToDoList}
+              handlePlusClick={() => setIsItemModalOpen(!isItemModalOpen)}
             />
           );
         })}
@@ -59,16 +62,20 @@ function App() {
           cursor: "pointer",
         }}
         onClick={() => {
-          setIsOpen(!isOpen);
+          setIsListModalOpen(!isListModalOpen);
         }}
       />
-      <ItemForm
-        isOpen={isOpen}
-        closeModal={() => setIsOpen(!isOpen)}
+      <ListForm
+        isOpen={isListModalOpen}
+        closeModal={() => setIsListModalOpen(!isListModalOpen)}
         handleAddToDoList={addNewToDoList}
         toDo={toDoItem}
         handleChange={hanldeTitleChange}
-      ></ItemForm>
+      ></ListForm>
+      <ItemForm
+        isOpen={isItemModalOpen}
+        closeModal={() => setIsItemModalOpen(!isItemModalOpen)}
+      />
     </div>
   );
 }

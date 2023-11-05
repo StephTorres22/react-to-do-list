@@ -8,54 +8,25 @@ ReactModal.setAppElement("#root");
 const ItemForm = ({
   isOpen,
   closeModal,
-  handleAddToDoList,
-  toDo,
+  item,
   handleChange,
+  handleItemToList,
 }) => {
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "aut0",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-    input: {
-      border: "none",
-      backgroundColor: "#dad0d0",
-    },
-
-    legend: {
-      marginBottom: "1rem",
-      textDecorationLine: "underline",
-      fontSize: "1.25rem",
-    },
-  };
-
   return (
-    <ReactModal
-      isOpen={isOpen}
-      onRequestClose={closeModal}
-      style={customStyles}
-      contentLabel="Example Modal"
-    >
-      <legend style={customStyles.legend}>Add a To Do List</legend>
-      <form>
-        <input
-          type="text"
-          name="title"
-          placeholder="List Title"
-          value={toDo.title}
-          onChange={handleChange}
-          style={customStyles.input}
-        />
-      </form>
+    <ReactModal isOpen={isOpen} onRequestClose={closeModal}>
+      <legend>Add Item to List</legend>
+      <input
+        type="text"
+        name="item"
+        placeholder="To Do"
+        value={item}
+        onChange={handleChange}
+      ></input>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Icon
           path={mdiPlus}
           size={1.5}
-          onClick={handleAddToDoList}
+          onClick={handleItemToList}
           style={{ cursor: "pointer" }}
         />
         <Icon
