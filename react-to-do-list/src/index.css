@@ -4,12 +4,11 @@ body {
   justify-content: center;
   min-width: 100vw;
   min-height: 100vh;
-  
 }
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
- 
+
   background-color: #dad0d0;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,4 +23,8 @@ body {
 
 button {
   color: rgba(255, 255, 255, 0.87);
+}
+
+.icon{
+  cursor: pointer;
 }

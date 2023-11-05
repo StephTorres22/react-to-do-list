@@ -5,12 +5,17 @@ import { mdiPencilOutline } from "@mdi/js";
 
 import ListItem from "./ListItem";
 
-const ToDoCard = ({ toDo }) => {
+const ToDoCard = ({ toDo, handleDelete }) => {
   return (
     <div className="card">
       <div className="card__top">
         <h3>{toDo.title}</h3>
-        <Icon path={mdiDeleteOffOutline} size={1} />
+        <Icon
+          path={mdiDeleteOffOutline}
+          size={1}
+          className="icon"
+          onClick={() => handleDelete(toDo.id)}
+        />
       </div>
       <div>
         <ul>
@@ -23,6 +28,7 @@ const ToDoCard = ({ toDo }) => {
         path={mdiPencilOutline}
         size={1}
         style={{ position: "relative", left: "85%" }}
+        className="icon"
       />
     </div>
   );

@@ -5,33 +5,48 @@ import Icon from "@mdi/react";
 import { mdiPlusCircle } from "@mdi/js";
 import { useState } from "react";
 import ItemForm from "./ItemForm";
-
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const intialToDo = { title: "", list: [] };
+  const intialToDo = { title: "", list: [], id: "" };
   const [toDoList, setToDoList] = useState([]);
-  const [toDoItem, setToDoItem] = useState(intialToDo)
+  const [toDoItem, setToDoItem] = useState(intialToDo);
   const [isOpen, setIsOpen] = useState(false);
 
   function hanldeTitleChange(e) {
-    const updatedToDo = {...toDoItem, [e.target.name]: e.target.value};
+    const updatedToDo = {
+      ...toDoItem,
+      [e.target.name]: e.target.value,
+      id: uuidv4(),
+    };
     setToDoItem(updatedToDo);
   }
 
   function addNewToDoList(e) {
-    e.preventDefault    
+    e.preventDefault;
     const updatedToDoList = toDoList.toSpliced(0, 0, toDoItem).reverse();
-    setToDoList(updatedToDoList)
-    setToDoItem(intialToDo)
+    setToDoList(updatedToDoList);
+    setToDoItem(intialToDo);
     setIsOpen(!isOpen);
   }
-  
+
+  function removeToDoList(id) {
+    const newList = toDoList.filter((list) => list.id !== id);
+    setToDoList(newList);
+  }
+
   return (
     <div style={{ width: "100%" }}>
       <SearchBar />
       <div className="card-display">
         {toDoList.map((item) => {
-          return <ToDoCard toDo={item} key={item} />;
+          return (
+            <ToDoCard
+              toDo={item}
+              key={item.id}
+              handleDelete={removeToDoList}
+            />
+          );
         })}
       </div>
       <Icon

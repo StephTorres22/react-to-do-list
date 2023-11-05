@@ -3,9 +3,16 @@ import ReactModal from "react-modal";
 import Icon from "@mdi/react";
 import { mdiClose, mdiPlus } from "@mdi/js";
 
-const ItemForm = ({ isOpen, closeModal, handleAddToDoList, toDo, handleChange }) => {
+ReactModal.setAppElement("#root");
+
+const ItemForm = ({
+  isOpen,
+  closeModal,
+  handleAddToDoList,
+  toDo,
+  handleChange,
+}) => {
   const customStyles = {
-    
     content: {
       top: "50%",
       left: "50%",
@@ -13,19 +20,17 @@ const ItemForm = ({ isOpen, closeModal, handleAddToDoList, toDo, handleChange })
       bottom: "aut0",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      
     },
     input: {
-        border: "none",
-        backgroundColor: "#dad0d0;"
+      border: "none",
+      backgroundColor: "#dad0d0",
     },
 
     legend: {
-        marginBottom: "1rem",
-        textDecorationLine: "underline",
-        fontSize: "1.25rem"
-
-    }
+      marginBottom: "1rem",
+      textDecorationLine: "underline",
+      fontSize: "1.25rem",
+    },
   };
 
   return (
@@ -37,8 +42,14 @@ const ItemForm = ({ isOpen, closeModal, handleAddToDoList, toDo, handleChange })
     >
       <legend style={customStyles.legend}>Add a To Do List</legend>
       <form>
-        <input type="text" name="title" placeholder="List Title" value={toDo.title} onChange={handleChange} style={customStyles.input} />
-        
+        <input
+          type="text"
+          name="title"
+          placeholder="List Title"
+          value={toDo.title}
+          onChange={handleChange}
+          style={customStyles.input}
+        />
       </form>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Icon
