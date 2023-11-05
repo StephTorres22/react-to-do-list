@@ -5,7 +5,7 @@ const AddItem = () => {
       style={{
         borderRadius: "50%",
         backgroundColor: "blue",
-        fontSize: "4rem",
+        fontSize: "3.5rem",
         border: "none",
         position: "fixed",
         bottom: "1rem",

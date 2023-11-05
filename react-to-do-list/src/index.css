@@ -4,28 +4,24 @@ body {
   justify-content: center;
   min-width: 100vw;
   min-height: 100vh;
-  color: rgba(255, 255, 255, 0.87);
-
+  
 }
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+ 
+  background-color: #dad0d0;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  display: flex;
-  flex-grow: 1;
 }
 
 #root {
   width: 100%;
 }
 
-button{
+button {
   color: rgba(255, 255, 255, 0.87);
-
 }

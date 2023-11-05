@@ -1,1 +1,10 @@
+@media screen {
+}
 
+.card {
+  max-width: 12rem;
+  max-height: 20rem;
+  background-color: white;
+  border-radius: 10px;
+  padding: .5rem;
+}
