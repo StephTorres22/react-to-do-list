@@ -37,7 +37,11 @@ function App() {
       alert("Pleast give your To Do a name");
       return;
     }
-    const updatedToDoList = toDoList.toSpliced(0, 0, toDoItem).reverse();
+    const updatedToDoList = toDoList.toSpliced(
+      toDoList.length - 1,
+      0,
+      toDoItem
+    );
     setToDoList(updatedToDoList);
     setToDoItem(intialToDo);
     setIsListModalOpen(!isListModalOpen);
@@ -59,7 +63,9 @@ function App() {
   }
 
   function addItemToList(id) {
+    console.log(id);
     const targetToDo = toDoList.filter((list) => list.id === id);
+    console.log(targetToDo);
     if (item === "") {
       alert("Please input a value");
       return;
@@ -70,6 +76,32 @@ function App() {
     toggleItemModal();
   }
 
+  function getTargetToDo(id) {
+    for (let i = 0; i < toDoList.length; i++) {
+      let toDo = toDoList[i];
+
+      for (let j = 0; j < toDo.list.length; j++) {
+        let item = toDo.list[j];
+        if (item.id === id) {
+          return [toDo, toDoList.indexOf(toDo)];
+        }
+      }
+    }
+  }
+
+  function deleteItemFromList(id) {
+    const toDo = getTargetToDo(id)[0];
+    const updatedList = toDo.list.filter((item) => item.id !== id);
+    const updatedToDo = { ...toDo, list: updatedList };
+    const updatedToDoList = toDoList.toSpliced(
+      getTargetToDo(id)[1],
+      1,
+      updatedToDo
+    );
+
+    setToDoList(updatedToDoList);
+    console.log(toDoList);
+  }
   return (
     <div style={{ width: "100%" }}>
       <SearchBar />
@@ -84,6 +116,7 @@ function App() {
               handleItemChange={handleItemChange}
               isOpen={isItemModalOpen}
               closeModal={toggleItemModal}
+              handleDeleteItem={deleteItemFromList}
             />
           );
         })}

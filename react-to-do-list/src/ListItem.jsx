@@ -20,7 +20,7 @@ const ListItem = ({ item, handleDelete }) => {
         id="isComplete"
         onClick={() => setIsComplete(!isComplete)}
       />
-      <Icon path={mdiDeleteOffOutline} onClick={handleDelete}/>
+      <Icon path={mdiDeleteOffOutline} size={1} onClick={() => handleDelete(item.id)}/>
     </div>
   );
 };

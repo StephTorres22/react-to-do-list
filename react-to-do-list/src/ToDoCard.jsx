@@ -13,6 +13,7 @@ const ToDoCard = ({
   item,
   isOpen,
   closeModal,
+  handleDeleteItem,
 }) => {
   return (
     <div className="card">
@@ -29,7 +30,13 @@ const ToDoCard = ({
       <div>
         <ul>
           {toDo.list.map((item) => {
-            return <ListItem item={item} key={item} />;
+            return (
+              <ListItem
+                item={item}
+                key={item.id}
+                handleDelete={handleDeleteItem}
+              />
+            );
           })}
         </ul>
       </div>
