@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import Icon from "@mdi/react";
+import { mdiDeleteOffOutline } from "@mdi/js";
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, handleDelete }) => {
   const [isComplete, setIsComplete] = useState(false);
 
   const styles = {
@@ -18,6 +20,7 @@ const ListItem = ({ item }) => {
         id="isComplete"
         onClick={() => setIsComplete(!isComplete)}
       />
+      <Icon path={mdiDeleteOffOutline} onClick={handleDelete}/>
     </div>
   );
 };

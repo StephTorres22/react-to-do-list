@@ -8,11 +8,12 @@ import ListForm from "./ListForm";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
+  const defaultItem = { title: "", id: "" };
   const intialToDo = { title: "", list: [], id: "" };
   const [toDoList, setToDoList] = useState([]);
   const [toDoItem, setToDoItem] = useState(intialToDo);
   const [isListModalOpen, setIsListModalOpen] = useState(false);
-  const [item, setItem] = useState("");
+  const [item, setItem] = useState(defaultItem);
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
 
   function toggleItemModal() {
@@ -32,11 +33,14 @@ function App() {
 
   function addNewToDoList(e) {
     e.preventDefault;
+    if (toDoItem.title === "") {
+      alert("Pleast give your To Do a name");
+      return;
+    }
     const updatedToDoList = toDoList.toSpliced(0, 0, toDoItem).reverse();
     setToDoList(updatedToDoList);
     setToDoItem(intialToDo);
     setIsListModalOpen(!isListModalOpen);
-    console.log(toDoList);
   }
 
   function removeToDoList(id) {
@@ -46,8 +50,12 @@ function App() {
 
   /* Item Functions */
   function handleItemChange(e) {
-    setItem(e.target.value);
-    console.log(item);
+    const updatedItem = {
+      ...item,
+      [e.target.name]: e.target.value,
+      id: uuidv4(),
+    };
+    setItem(updatedItem);
   }
 
   function addItemToList(id) {
@@ -58,9 +66,8 @@ function App() {
     }
     targetToDo[0].list.push(item);
 
-    setItem("");
+    setItem(defaultItem);
     toggleItemModal();
-    console.log(toDoList);
   }
 
   return (

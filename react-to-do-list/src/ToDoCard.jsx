@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import Icon from "@mdi/react";
-import { mdiDeleteOffOutline } from "@mdi/js";
-import { mdiPencilOutline, mdiPlus } from "@mdi/js";
+import { mdiPencilOutline, mdiPlus, mdiDeleteOffOutline } from "@mdi/js";
 
 import ListItem from "./ListItem";
 import ItemForm from "./ItemForm";

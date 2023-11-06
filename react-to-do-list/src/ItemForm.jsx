@@ -18,7 +18,7 @@ const ItemForm = ({
       <legend>Add Item to {title} List</legend>
       <input
         type="text"
-        name="item"
+        name="title"
         placeholder="To Do"
         value={item}
         onChange={handleChange}
