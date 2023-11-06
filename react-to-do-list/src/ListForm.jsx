@@ -12,35 +12,9 @@ const ListForm = ({
   toDo,
   handleChange,
 }) => {
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "aut0",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-    input: {
-      border: "none",
-      backgroundColor: "#dad0d0",
-    },
-
-    legend: {
-      marginBottom: "1rem",
-      textDecorationLine: "underline",
-      fontSize: "1.25rem",
-    },
-  };
-
   return (
-    <ReactModal
-      isOpen={isOpen}
-      onRequestClose={closeModal}
-      style={customStyles}
-      
-    >
-      <legend style={customStyles.legend}>Add a To Do List</legend>
+    <ReactModal isOpen={isOpen} onRequestClose={closeModal} className="modal">
+      <legend>Add a To Do List</legend>
       <form>
         <input
           type="text"
@@ -48,10 +22,9 @@ const ListForm = ({
           placeholder="List Title"
           value={toDo.title}
           onChange={handleChange}
-          style={customStyles.input}
         />
       </form>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div>
         <Icon
           path={mdiPlus}
           size={1.5}

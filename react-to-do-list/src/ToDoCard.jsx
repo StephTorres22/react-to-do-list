@@ -4,8 +4,17 @@ import { mdiDeleteOffOutline } from "@mdi/js";
 import { mdiPencilOutline, mdiPlus } from "@mdi/js";
 
 import ListItem from "./ListItem";
+import ItemForm from "./ItemForm";
 
-const ToDoCard = ({ toDo, handleDelete, handlePlusClick }) => {
+const ToDoCard = ({
+  toDo,
+  handleDelete,
+  handleAddItem,
+  handleItemChange,
+  item,
+  isOpen,
+  closeModal,
+}) => {
   return (
     <div className="card">
       <div className="card__top">
@@ -30,10 +39,18 @@ const ToDoCard = ({ toDo, handleDelete, handlePlusClick }) => {
           path={mdiPlus}
           size={1.25}
           className="icon"
-          onClick={handlePlusClick}
+          onClick={closeModal}
         />
         <Icon path={mdiPencilOutline} size={1} className="icon" />
       </div>
+      <ItemForm
+        isOpen={isOpen}
+        closeModal={closeModal}
+        title={toDo.title}
+        handleChange={handleItemChange}
+        item={item}
+        handleAddItemToList={() => handleAddItem(toDo.id)}
+      />
     </div>
   );
 };

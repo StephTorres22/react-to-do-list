@@ -10,11 +10,12 @@ const ItemForm = ({
   closeModal,
   item,
   handleChange,
-  handleItemToList,
+  handleAddItemToList,
+  title
 }) => {
   return (
-    <ReactModal isOpen={isOpen} onRequestClose={closeModal}>
-      <legend>Add Item to List</legend>
+    <ReactModal isOpen={isOpen} onRequestClose={closeModal} className="modal">
+      <legend>Add Item to {title} List</legend>
       <input
         type="text"
         name="item"
@@ -26,7 +27,7 @@ const ItemForm = ({
         <Icon
           path={mdiPlus}
           size={1.5}
-          onClick={handleItemToList}
+          onClick={handleAddItemToList}
           style={{ cursor: "pointer" }}
         />
         <Icon

@@ -25,6 +25,43 @@ button {
   color: rgba(255, 255, 255, 0.87);
 }
 
-.icon{
+.icon {
   cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 18rem;
+  aspect-ratio: 1 / 1;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #dad0d0;
+}
+
+.modal legend {
+  text-decoration: underline;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.modal div {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 65%;
+}
+
+.modal input {
+  background-color: white;
+  border-radius: 5px;
+  border: none;
+  padding-left: 0.5rem;
+  font-size: 1.25rem;
 }

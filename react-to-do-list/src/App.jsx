@@ -6,14 +6,18 @@ import { mdiPlusCircle } from "@mdi/js";
 import { useState } from "react";
 import ListForm from "./ListForm";
 import { v4 as uuidv4 } from "uuid";
-import ItemForm from "./ItemForm";
 
 function App() {
   const intialToDo = { title: "", list: [], id: "" };
   const [toDoList, setToDoList] = useState([]);
   const [toDoItem, setToDoItem] = useState(intialToDo);
   const [isListModalOpen, setIsListModalOpen] = useState(false);
+  const [item, setItem] = useState("");
   const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+
+  function toggleItemModal() {
+    setIsItemModalOpen(!isItemModalOpen);
+  }
 
   function hanldeTitleChange(e) {
     const updatedToDo = {
@@ -24,17 +28,39 @@ function App() {
     setToDoItem(updatedToDo);
   }
 
+  /* List functions */
+
   function addNewToDoList(e) {
     e.preventDefault;
     const updatedToDoList = toDoList.toSpliced(0, 0, toDoItem).reverse();
     setToDoList(updatedToDoList);
     setToDoItem(intialToDo);
     setIsListModalOpen(!isListModalOpen);
+    console.log(toDoList);
   }
 
   function removeToDoList(id) {
     const newList = toDoList.filter((list) => list.id !== id);
     setToDoList(newList);
+  }
+
+  /* Item Functions */
+  function handleItemChange(e) {
+    setItem(e.target.value);
+    console.log(item);
+  }
+
+  function addItemToList(id) {
+    const targetToDo = toDoList.filter((list) => list.id === id);
+    if (item === "") {
+      alert("Please input a value");
+      return;
+    }
+    targetToDo[0].list.push(item);
+
+    setItem("");
+    toggleItemModal();
+    console.log(toDoList);
   }
 
   return (
@@ -47,7 +73,10 @@ function App() {
               toDo={item}
               key={item.id}
               handleDelete={removeToDoList}
-              handlePlusClick={() => setIsItemModalOpen(!isItemModalOpen)}
+              handleAddItem={addItemToList}
+              handleItemChange={handleItemChange}
+              isOpen={isItemModalOpen}
+              closeModal={toggleItemModal}
             />
           );
         })}
@@ -72,10 +101,6 @@ function App() {
         toDo={toDoItem}
         handleChange={hanldeTitleChange}
       ></ListForm>
-      <ItemForm
-        isOpen={isItemModalOpen}
-        closeModal={() => setIsItemModalOpen(!isItemModalOpen)}
-      />
     </div>
   );
 }
