@@ -13,7 +13,7 @@ const ListItem = ({ item, handleDelete }) => {
 
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <li style={styles}>{item}</li>
+      <li style={styles}>{item.title}</li>
       <input
         type="checkbox"
         name="isComplete"
