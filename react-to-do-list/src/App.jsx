@@ -91,6 +91,7 @@ function App() {
       isComplete: !targetItem.isComplete,
     };
 
+    /* change state of number of incomplete tasks */
     if (updatedItem.isComplete == true) {
       setIncompleteTasks(incompleteTasks - 1);
     } else {
@@ -114,6 +115,7 @@ function App() {
       updatedToDo
     );
     setToDoList(updatedToDoList);
+    console.log(toDoList);
   }
 
   /* gets 2 things, I know this is bad, but didn't want to re-write a nested for loop 2 times,  */
@@ -132,11 +134,19 @@ function App() {
 
   function deleteItemFromList(id) {
     const toDo = getTargetToDo(id)[0];
+
+    /* check and change state for number of incomplete tasks before removal. */
+    toDo.list.map((item) => {
+      if (item.id === id) {
+        console.log(item.isComplete);
+        if (item.isComplete !== true) {
+          setIncompleteTasks(incompleteTasks - 1);
+        }
+      }
+    });
     const updatedList = toDo.list.filter((item) => item.id !== id);
     const updatedToDo = { ...toDo, list: updatedList };
-    if (item.isComplete == false) {
-      setIncompleteTasks(incompleteTasks - 1);
-    }
+
     const updatedToDoList = toDoList.toSpliced(
       toDoList.indexOf(toDo),
       1,
