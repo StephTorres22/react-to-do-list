@@ -8,7 +8,7 @@ import ListForm from "./ListForm";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const defaultItem = { title: "", id: "" };
+  const defaultItem = { title: "", id: "", isComplete: false };
   const intialToDo = { title: "", list: [], id: "" };
   const [toDoList, setToDoList] = useState([]);
   const [toDoItem, setToDoItem] = useState(intialToDo);
@@ -35,12 +35,6 @@ function App() {
     //this is how you do it!, heres an array, with everything from toDoList (spread operator), and this new obj.
     const updatedToDoList = [...toDoList, toDoItem];
 
-    //muppet!
-    /* toDoList.toSpliced(
-      toDoList.length - 1,
-      0,
-      toDoItem
-    ); */
     setToDoList(updatedToDoList);
     setToDoItem(intialToDo);
     setIsListModalOpen(!isListModalOpen);
@@ -74,6 +68,38 @@ function App() {
     // toggleItemModal();
   }
 
+  /* this is called on checkbox tick */
+  function setItemComplete(id) {
+    let targetItem = getTargetToDo(id)[1];
+    let targetToDo = getTargetToDo(id)[0];
+
+    /* re-assigns item.isComplete to opposite */
+    const updatedItem = {
+      ...targetItem,
+      isComplete: !targetItem.isComplete,
+    };
+
+    /* removes old item, puts new item in it's place */
+    const updatedList = targetToDo.list.toSpliced(
+      targetToDo.list.indexOf(targetItem),
+      1,
+      updatedItem
+    );
+
+    /* re-assigns todos.list to new list */
+    const updatedToDo = { ...targetToDo, list: updatedList };
+
+    /* removes old todo and replaces with updated to do */
+    const updatedToDoList = toDoList.toSpliced(
+      toDoList.indexOf(targetToDo),
+      1,
+      updatedToDo
+    );
+    setToDoList(updatedToDoList);
+   // console.log(toDoList);
+  }
+
+  /* gets 2 things, I know this is bad, but didn't want to re-write a nested for loop 2 times,  */
   function getTargetToDo(id) {
     for (let i = 0; i < toDoList.length; i++) {
       let toDo = toDoList[i];
@@ -81,7 +107,7 @@ function App() {
       for (let j = 0; j < toDo.list.length; j++) {
         let item = toDo.list[j];
         if (item.id === id) {
-          return [toDo, toDoList.indexOf(toDo)];
+          return [toDo, item];
         }
       }
     }
@@ -92,7 +118,7 @@ function App() {
     const updatedList = toDo.list.filter((item) => item.id !== id);
     const updatedToDo = { ...toDo, list: updatedList };
     const updatedToDoList = toDoList.toSpliced(
-      getTargetToDo(id)[1],
+      toDoList.indexOf(toDo),
       1,
       updatedToDo
     );
@@ -112,6 +138,7 @@ function App() {
               handleAddItem={addItemToList}
               handleItemChange={handleItemChange}
               handleDeleteItem={deleteItemFromList}
+              handleCheckClick={setItemComplete}
             />
           );
         })}

@@ -12,6 +12,7 @@ const ToDoCard = ({
   handleItemChange,
   item,
   handleDeleteItem,
+  handleCheckClick,
 }) => {
   function toggleItemModal() {
     setIsItemModalOpen(!isItemModalOpen);
@@ -39,6 +40,7 @@ const ToDoCard = ({
                 item={item}
                 key={item.id}
                 handleDelete={handleDeleteItem}
+                handleCheckClick={handleCheckClick}
               />
             );
           })}
@@ -60,7 +62,10 @@ const ToDoCard = ({
         title={toDo.title}
         handleChange={handleItemChange}
         item={item}
-        handleAddItemToList={() => handleAddItem(toDo.id)}
+        handleAddItemToList={() => {
+          handleAddItem(toDo.id);
+          toggleItemModal();
+        }}
       />
     </div>
   );

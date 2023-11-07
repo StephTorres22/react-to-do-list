@@ -1,14 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+
 import Icon from "@mdi/react";
 import { mdiDeleteOffOutline } from "@mdi/js";
 
-const ListItem = ({ item, handleDelete }) => {
-  const [isComplete, setIsComplete] = useState(false);
-
+const ListItem = ({ item, handleDelete, handleCheckClick }) => {
   const styles = {
-    color: isComplete ? "lightgray" : "black",
-    textDecorationLine: isComplete ? "line-through" : "none",
+    color: item.isComplete ? "lightgray" : "black",
+    textDecorationLine: item.isComplete ? "line-through" : "none",
   };
 
   return (
@@ -18,9 +16,13 @@ const ListItem = ({ item, handleDelete }) => {
         type="checkbox"
         name="isComplete"
         id="isComplete"
-        onClick={() => setIsComplete(!isComplete)}
+        onClick={() => handleCheckClick(item.id)}
       />
-      <Icon path={mdiDeleteOffOutline} size={1} onClick={() => handleDelete(item.id)}/>
+      <Icon
+        path={mdiDeleteOffOutline}
+        size={1}
+        onClick={() => handleDelete(item.id)}
+      />
     </div>
   );
 };
