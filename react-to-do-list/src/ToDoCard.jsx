@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Icon from "@mdi/react";
 import { mdiPencilOutline, mdiPlus, mdiDeleteOffOutline } from "@mdi/js";
-
+import { useState } from "react";
 import ListItem from "./ListItem";
 import ItemForm from "./ItemForm";
 
@@ -11,10 +11,14 @@ const ToDoCard = ({
   handleAddItem,
   handleItemChange,
   item,
-  isOpen,
-  closeModal,
   handleDeleteItem,
 }) => {
+  function toggleItemModal() {
+    setIsItemModalOpen(!isItemModalOpen);
+  }
+
+  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
+
   return (
     <div className="card">
       <div className="card__top">
@@ -45,13 +49,14 @@ const ToDoCard = ({
           path={mdiPlus}
           size={1.25}
           className="icon"
-          onClick={closeModal}
+          onClick={toggleItemModal}
         />
         <Icon path={mdiPencilOutline} size={1} className="icon" />
       </div>
       <ItemForm
-        isOpen={isOpen}
-        closeModal={closeModal}
+        key={toDo.id}
+        isOpen={isItemModalOpen}
+        closeModal={toggleItemModal}
         title={toDo.title}
         handleChange={handleItemChange}
         item={item}

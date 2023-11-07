@@ -14,11 +14,6 @@ function App() {
   const [toDoItem, setToDoItem] = useState(intialToDo);
   const [isListModalOpen, setIsListModalOpen] = useState(false);
   const [item, setItem] = useState(defaultItem);
-  const [isItemModalOpen, setIsItemModalOpen] = useState(false);
-
-  function toggleItemModal() {
-    setIsItemModalOpen(!isItemModalOpen);
-  }
 
   function hanldeTitleChange(e) {
     const updatedToDo = {
@@ -37,11 +32,15 @@ function App() {
       alert("Pleast give your To Do a name");
       return;
     }
-    const updatedToDoList = toDoList.toSpliced(
+    //this is how you do it!, heres an array, with everything from toDoList (spread operator), and this new obj.
+    const updatedToDoList = [...toDoList, toDoItem];
+
+    //muppet!
+    /* toDoList.toSpliced(
       toDoList.length - 1,
       0,
       toDoItem
-    );
+    ); */
     setToDoList(updatedToDoList);
     setToDoItem(intialToDo);
     setIsListModalOpen(!isListModalOpen);
@@ -73,7 +72,7 @@ function App() {
     targetToDo[0].list.push(item);
 
     setItem(defaultItem);
-    toggleItemModal();
+    // toggleItemModal();
   }
 
   function getTargetToDo(id) {
@@ -114,8 +113,6 @@ function App() {
               handleDelete={removeToDoList}
               handleAddItem={addItemToList}
               handleItemChange={handleItemChange}
-              isOpen={isItemModalOpen}
-              closeModal={toggleItemModal}
               handleDeleteItem={deleteItemFromList}
             />
           );
