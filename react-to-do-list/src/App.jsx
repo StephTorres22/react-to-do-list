@@ -62,9 +62,8 @@ function App() {
   }
 
   function addItemToList(id) {
-    console.log(id);
     const targetToDo = toDoList.filter((list) => list.id === id);
-    console.log(targetToDo);
+
     if (item === "") {
       alert("Please input a value");
       return;
@@ -99,7 +98,6 @@ function App() {
     );
 
     setToDoList(updatedToDoList);
-    console.log(toDoList);
   }
   return (
     <div style={{ width: "100%" }}>
