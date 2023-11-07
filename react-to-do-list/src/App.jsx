@@ -14,6 +14,18 @@ function App() {
   const [toDoItem, setToDoItem] = useState(intialToDo);
   const [isListModalOpen, setIsListModalOpen] = useState(false);
   const [item, setItem] = useState(defaultItem);
+  const [incompleteTasks, setIncompleteTasks] = useState(0);
+
+  function getTotalNumberOfTask() {
+    for (let i = 0; i < toDoList.length; i++) {
+      let toDo = toDoList[i];
+      let total = 0;
+      for (let j = 0; j < toDo.list.length; j++) {
+        total += toDo.list.length;
+      }
+      return total;
+    }
+  }
 
   function hanldeTitleChange(e) {
     const updatedToDo = {
@@ -65,7 +77,7 @@ function App() {
     targetToDo[0].list.push(item);
 
     setItem(defaultItem);
-    // toggleItemModal();
+    setIncompleteTasks(incompleteTasks + 1);
   }
 
   /* this is called on checkbox tick */
@@ -78,6 +90,12 @@ function App() {
       ...targetItem,
       isComplete: !targetItem.isComplete,
     };
+
+    if (updatedItem.isComplete == true) {
+      setIncompleteTasks(incompleteTasks - 1);
+    } else {
+      setIncompleteTasks(incompleteTasks + 1);
+    }
 
     /* removes old item, puts new item in it's place */
     const updatedList = targetToDo.list.toSpliced(
@@ -96,7 +114,6 @@ function App() {
       updatedToDo
     );
     setToDoList(updatedToDoList);
-   // console.log(toDoList);
   }
 
   /* gets 2 things, I know this is bad, but didn't want to re-write a nested for loop 2 times,  */
@@ -117,6 +134,9 @@ function App() {
     const toDo = getTargetToDo(id)[0];
     const updatedList = toDo.list.filter((item) => item.id !== id);
     const updatedToDo = { ...toDo, list: updatedList };
+    if (item.isComplete == false) {
+      setIncompleteTasks(incompleteTasks - 1);
+    }
     const updatedToDoList = toDoList.toSpliced(
       toDoList.indexOf(toDo),
       1,
@@ -143,6 +163,8 @@ function App() {
           );
         })}
       </div>
+      <h1>Total: {getTotalNumberOfTask()}</h1>
+      <h1>Total incomplete tasks: {incompleteTasks}</h1>
       <Icon
         path={mdiPlusCircle}
         size={4}
