@@ -16,13 +16,14 @@ function App() {
   const [item, setItem] = useState(defaultItem);
   const [incompleteTasks, setIncompleteTasks] = useState(0);
 
+  
   function getTotalNumberOfTask() {
+    let total = 0;
     for (let i = 0; i < toDoList.length; i++) {
       let toDo = toDoList[i];
-      let total = 0;
-      for (let j = 0; j < toDo.list.length; j++) {
-        total += toDo.list.length;
-      }
+
+      total += toDo.list.length;
+      console.log(total);
       return total;
     }
   }
@@ -85,7 +86,7 @@ function App() {
     let targetItem = getTargetToDo(id)[1];
     let targetToDo = getTargetToDo(id)[0];
 
-    /* re-assigns item.isComplete to opposite */
+    /* re-assigns item.isComplete to opposite, using copy of targetItem */
     const updatedItem = {
       ...targetItem,
       isComplete: !targetItem.isComplete,
@@ -115,7 +116,6 @@ function App() {
       updatedToDo
     );
     setToDoList(updatedToDoList);
-    console.log(toDoList);
   }
 
   /* gets 2 things, I know this is bad, but didn't want to re-write a nested for loop 2 times,  */
@@ -138,7 +138,6 @@ function App() {
     /* check and change state for number of incomplete tasks before removal. */
     toDo.list.map((item) => {
       if (item.id === id) {
-        console.log(item.isComplete);
         if (item.isComplete !== true) {
           setIncompleteTasks(incompleteTasks - 1);
         }
@@ -173,7 +172,7 @@ function App() {
           );
         })}
       </div>
-      <h1>Total: {getTotalNumberOfTask()}</h1>
+      <h1>Total: {getTotalNumberOfTask() ? getTotalNumberOfTask() : 0}</h1>
       <h1>Total incomplete tasks: {incompleteTasks}</h1>
       <Icon
         path={mdiPlusCircle}
