@@ -6,6 +6,7 @@ import { mdiPlusCircle } from "@mdi/js";
 import { useState } from "react";
 import ListForm from "./ListForm";
 import { v4 as uuidv4 } from "uuid";
+import ListItem from "./ListItem";
 
 function App() {
   const defaultItem = { title: "", id: "", isComplete: false };
@@ -159,15 +160,14 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
 
   function searchTaskByTitle(title) {
-    const filteredTasks = toDoList.map((toDo) => {
+    const filteredTasks = [];
+    toDoList.forEach((toDo) => {
       if (toDo.list.length !== 0) {
-        toDo.list.filter((item) => {
-          if (item.title == title) {
-            return item;
-          }
-        });
+        let additions = toDo.list.filter((item) => item.title.includes(title));
+        filteredTasks.push(additions);
       }
     });
+
     return filteredTasks;
   }
 
@@ -182,20 +182,26 @@ function App() {
         onChange={(e) => handleSearchBarChange(e)}
         searchBarValue={searchInput}
       />
+      if()
       <div className="card-display">
-        {toDoList.map((item) => {
-          return (
-            <ToDoCard
-              toDo={item}
-              key={item.id}
-              handleDelete={removeToDoList}
-              handleAddItem={addItemToList}
-              handleItemChange={handleItemChange}
-              handleDeleteItem={deleteItemFromList}
-              handleCheckClick={setItemComplete}
-            />
-          );
-        })}
+        {searchInput === ""
+          ? toDoList.map((item) => {
+              return (
+                <ToDoCard
+                  toDo={item}
+                  key={item.id}
+                  handleDelete={removeToDoList}
+                  handleAddItem={addItemToList}
+                  handleItemChange={handleItemChange}
+                  handleDeleteItem={deleteItemFromList}
+                  handleCheckClick={setItemComplete}
+                />
+              );
+            })
+          : searchTaskByTitle(searchInput).map((item) => {
+              return (
+              <ListItem key={item.id} item={item} />);
+            })}
       </div>
       <h1>Total: {getTotalNumberOfTask() ? getTotalNumberOfTask() : 0}</h1>
       <h1>Total incomplete tasks: {incompleteTasks}</h1>
