@@ -16,14 +16,12 @@ function App() {
   const [item, setItem] = useState(defaultItem);
   const [incompleteTasks, setIncompleteTasks] = useState(0);
 
-  
   function getTotalNumberOfTask() {
     let total = 0;
     for (let i = 0; i < toDoList.length; i++) {
       let toDo = toDoList[i];
 
       total += toDo.list.length;
-      console.log(total);
       return total;
     }
   }
@@ -79,6 +77,7 @@ function App() {
 
     setItem(defaultItem);
     setIncompleteTasks(incompleteTasks + 1);
+    console.log(searchInput);
   }
 
   /* this is called on checkbox tick */
@@ -154,9 +153,35 @@ function App() {
 
     setToDoList(updatedToDoList);
   }
+
+  /* Search functionality */
+
+  const [searchInput, setSearchInput] = useState("");
+
+  function searchTaskByTitle(title) {
+    const filteredTasks = toDoList.map((toDo) => {
+      if (toDo.list.length !== 0) {
+        toDo.list.filter((item) => {
+          if (item.title == title) {
+            return item;
+          }
+        });
+      }
+    });
+    return filteredTasks;
+  }
+
+  function handleSearchBarChange(e) {
+    console.log(searchInput);
+    setSearchInput(e.target.value);
+  }
   return (
     <div style={{ width: "100%" }}>
-      <SearchBar />
+      <SearchBar
+        handleSearch={searchTaskByTitle}
+        onChange={(e) => handleSearchBarChange(e)}
+        searchBarValue={searchInput}
+      />
       <div className="card-display">
         {toDoList.map((item) => {
           return (

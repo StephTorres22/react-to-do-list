@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
+
 import Icon from "@mdi/react";
 import { mdiMagnify } from "@mdi/js";
 
-const SearchBar = () => {
+const SearchBar = ({ onChange, handleSearch, searchBarValue }) => {
   return (
     <div
       style={{
@@ -15,6 +17,11 @@ const SearchBar = () => {
     >
       <input
         type="text"
+        name="searchBar"
+        defaultValue={searchBarValue}
+        id="searchBar"
+        onChange={onChange}
+        placeholder="Search"
         style={{
           font: "1rem",
           height: "1.5rem",
@@ -23,7 +30,12 @@ const SearchBar = () => {
           paddingLeft: "5px",
         }}
       />
-      <Icon path={mdiMagnify} size={1.5} style={{ cursor: "pointer" }} />
+      <Icon
+        path={mdiMagnify}
+        size={1.5}
+        style={{ cursor: "pointer" }}
+        onClick={() => handleSearch(searchBarValue)}
+      />
     </div>
   );
 };
