@@ -17,6 +17,26 @@ function App() {
   const [item, setItem] = useState(defaultItem);
   const [incompleteTasks, setIncompleteTasks] = useState(0);
 
+  /* gets 2 things, I know this is bad, but didn't want to re-write a nested for loop 2 times,  */
+  function getTargetToDoFromItemID(itemId) {
+    for (let i = 0; i < toDoList.length; i++) {
+      let toDo = toDoList[i];
+
+      for (let j = 0; j < toDo.list.length; j++) {
+        let item = toDo.list[j];
+        if (item.id === itemId) {
+          return [toDo, item];
+        }
+      }
+    }
+  }
+
+  function getTargetToDoFromID(id) {
+    for (let i = 0; i < toDoList.length; i++) {
+      if (toDoList[i].id === id) return toDoList[i];
+    }
+  }
+
   function getTotalNumberOfTask() {
     let total = 0;
     for (let i = 0; i < toDoList.length; i++) {
@@ -53,6 +73,14 @@ function App() {
   }
 
   function removeToDoList(id) {
+    /* Keep incomplete task number update on ToDoCard removal,  */
+    const targetToDo = getTargetToDoFromID(id);
+    targetToDo.list.forEach((item) => {
+      if (item.isComplete === false) {
+        setIncompleteTasks((n) => n - 1);
+      }
+    });
+
     const newList = toDoList.filter((list) => list.id !== id);
     setToDoList(newList);
   }
@@ -78,13 +106,12 @@ function App() {
 
     setItem(defaultItem);
     setIncompleteTasks(incompleteTasks + 1);
-    console.log(searchInput);
   }
 
   /* this is called on checkbox tick */
   function setItemComplete(id) {
-    let targetItem = getTargetToDo(id)[1];
-    let targetToDo = getTargetToDo(id)[0];
+    let targetItem = getTargetToDoFromItemID(id)[1];
+    let targetToDo = getTargetToDoFromItemID(id)[0];
 
     /* re-assigns item.isComplete to opposite, using copy of targetItem */
     const updatedItem = {
@@ -118,22 +145,8 @@ function App() {
     setToDoList(updatedToDoList);
   }
 
-  /* gets 2 things, I know this is bad, but didn't want to re-write a nested for loop 2 times,  */
-  function getTargetToDo(id) {
-    for (let i = 0; i < toDoList.length; i++) {
-      let toDo = toDoList[i];
-
-      for (let j = 0; j < toDo.list.length; j++) {
-        let item = toDo.list[j];
-        if (item.id === id) {
-          return [toDo, item];
-        }
-      }
-    }
-  }
-
   function deleteItemFromList(id) {
-    const toDo = getTargetToDo(id)[0];
+    const toDo = getTargetToDoFromItemID(id)[0];
 
     /* check and change state for number of incomplete tasks before removal. */
     toDo.list.map((item) => {
@@ -172,7 +185,6 @@ function App() {
   }
 
   function handleSearchBarChange(e) {
-    console.log(searchInput);
     setSearchInput(e.target.value);
   }
   return (
@@ -182,7 +194,7 @@ function App() {
         onChange={(e) => handleSearchBarChange(e)}
         searchBarValue={searchInput}
       />
-      if()
+
       <div className="card-display">
         {searchInput === ""
           ? toDoList.map((item) => {
@@ -199,8 +211,7 @@ function App() {
               );
             })
           : searchTaskByTitle(searchInput).map((item) => {
-              return (
-              <ListItem key={item.id} item={item} />);
+              return <ListItem key={item.id} item={item} />;
             })}
       </div>
       <h1>Total: {getTotalNumberOfTask() ? getTotalNumberOfTask() : 0}</h1>
