@@ -73,7 +73,7 @@ function App() {
   }
 
   function removeToDoList(id) {
-    /* Keep incomplete task number update on ToDoCard removal,  */
+    /* Keep incomplete task number up to date on ToDoCard removal,  */
     const targetToDo = getTargetToDoFromID(id);
     targetToDo.list.forEach((item) => {
       if (item.isComplete === false) {
