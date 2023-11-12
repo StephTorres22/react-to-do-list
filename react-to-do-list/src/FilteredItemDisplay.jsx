@@ -3,12 +3,10 @@ import FilteredItem from "./FilterItem";
 
 function FilteredItemDisplay({ arr }) {
   return (
-    
-    <div>
+    <div className="card-display">
       {arr.map((item) => {
         return <FilteredItem key={item.id} item={item} />;
       })}
-      ;
     </div>
   );
 }

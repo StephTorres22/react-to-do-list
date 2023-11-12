@@ -6,7 +6,7 @@
   gap: 1rem;
 }
 
-.card, .filter_item {
+.card, .filtered_item {
   width: 15rem;
 
   background-color: white;

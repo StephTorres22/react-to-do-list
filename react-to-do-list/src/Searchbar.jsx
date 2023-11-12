@@ -12,6 +12,7 @@ const SearchBar = ({ onChange, handleSearch, searchBarValue }) => {
         alignItems: "center",
         maxWidth: "100%",
         paddingTop: "1rem",
+        transform: "translate(20%)",
         gap: "1rem",
       }}
     >
@@ -26,7 +27,8 @@ const SearchBar = ({ onChange, handleSearch, searchBarValue }) => {
           font: "1rem",
           height: "1.5rem",
           borderRadius: "5px",
-          width: "25%",
+          width: "25rem",
+
           paddingLeft: "5px",
         }}
       />

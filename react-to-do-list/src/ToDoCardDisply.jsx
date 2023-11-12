@@ -11,7 +11,7 @@ function ToDoCardDisplay({
   setItemComplete,
 }) {
   return (
-    <div className="card_display">
+    <div className="card-display">
       {toDoList.map((item) => {
         return (
           <ToDoCard

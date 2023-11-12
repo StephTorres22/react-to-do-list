@@ -2,6 +2,7 @@
 function FilteredItem({ item }) {
   return (
     <div>
+      
       {item.map((item) => {
         console.log(item);
         return (
@@ -9,7 +10,7 @@ function FilteredItem({ item }) {
             <p>{item.title}</p>
             <p>Is complete: {`${item.isComplete}`}</p>
           </div>
-        );
+        )
       })}
     </div>
   );

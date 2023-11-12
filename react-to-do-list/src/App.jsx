@@ -1,14 +1,12 @@
-import SearchBar from "./Searchbar";
 import "./App.css";
-import ToDoCard from "./ToDoCard";
 import Icon from "@mdi/react";
 import { mdiPlusCircle } from "@mdi/js";
 import { useState } from "react";
 import ListForm from "./ListForm";
 import { v4 as uuidv4 } from "uuid";
-import ListItem from "./ListItem";
 import ToDoCardDisplay from "./ToDoCardDisply";
-import FilteredItemDisplay from "./FliteredItemDisplay";
+import FilteredItemDisplay from "./FilteredItemDisplay";
+import Header from "./Header";
 
 function App() {
   const defaultItem = { title: "", id: "", isComplete: false };
@@ -36,16 +34,6 @@ function App() {
   function getTargetToDoFromID(id) {
     for (let i = 0; i < toDoList.length; i++) {
       if (toDoList[i].id === id) return toDoList[i];
-    }
-  }
-
-  function getTotalNumberOfTask() {
-    let total = 0;
-    for (let i = 0; i < toDoList.length; i++) {
-      let toDo = toDoList[i];
-
-      total += toDo.list.length;
-      return total;
     }
   }
 
@@ -191,31 +179,14 @@ function App() {
   }
   return (
     <div style={{ width: "100%" }}>
-      <SearchBar
+      <Header
         handleSearch={searchTaskByTitle}
-        onChange={(e) => handleSearchBarChange(e)}
+        onInputChange={(e) => handleSearchBarChange(e)}
         searchBarValue={searchInput}
+        toDoList={toDoList}
+        incompleteTasks={incompleteTasks}
       />
 
-      {/* <div className="card-display">
-        {searchInput === ""
-          ? toDoList.map((item) => {
-              return (
-                <ToDoCard
-                  toDo={item}
-                  key={item.id}
-                  handleDelete={removeToDoList}
-                  handleAddItem={addItemToList}
-                  handleItemChange={handleItemChange}
-                  handleDeleteItem={deleteItemFromList}
-                  handleCheckClick={setItemComplete}
-                />
-              );
-            })
-          : searchTaskByTitle(searchInput).map((item) => {
-              return <ListItem key={item.id} item={item} />;
-            })}
-      </div> */}
       {searchInput === "" ? (
         <ToDoCardDisplay
           toDoList={toDoList}
@@ -228,8 +199,7 @@ function App() {
       ) : (
         <FilteredItemDisplay arr={searchTaskByTitle(searchInput)} />
       )}
-      <h1>Total: {getTotalNumberOfTask() ? getTotalNumberOfTask() : 0}</h1>
-      <h1>Total incomplete tasks: {incompleteTasks}</h1>
+
       <Icon
         path={mdiPlusCircle}
         size={4}
