@@ -35,11 +35,13 @@ const ToDoCard = ({
       <div
         style={{
           display: "flex",
-
+          alignItems: "flex-start",
           flex: "1 0 auto",
+          paddingTop: "0",
+          marginTop: "0",
         }}
       >
-        <ul style={{ display: "flex", flex: "1 0 auto", flexDirection: "column"}}>
+        <ul style={{ display: "flex", flexDirection: "column"}}>
           {toDo.list.map((item) => {
             return (
               <ListItem
