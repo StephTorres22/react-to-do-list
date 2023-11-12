@@ -156,6 +156,7 @@ function App() {
     );
 
     setToDoList(updatedToDoList);
+    setSearchInput("");
   }
 
   /* Search functionality */
@@ -174,14 +175,14 @@ function App() {
     return filteredTasks;
   }
 
-  function handleSearchBarChange(e) {
+  /*   function handleSearchBarChange(e) {
     setSearchInput(e.target.value);
-  }
+  } */
   return (
     <div style={{ width: "100%" }}>
       <Header
         handleSearch={searchTaskByTitle}
-        onInputChange={(e) => handleSearchBarChange(e)}
+        onInputChange={(e) => setSearchInput(e.target.value)}
         searchBarValue={searchInput}
         toDoList={toDoList}
         incompleteTasks={incompleteTasks}
@@ -197,7 +198,10 @@ function App() {
           setItemComplete={setItemComplete}
         />
       ) : (
-        <FilteredItemDisplay arr={searchTaskByTitle(searchInput)} />
+        <FilteredItemDisplay
+          arr={searchTaskByTitle(searchInput)}
+          handleDelete={deleteItemFromList}
+        />
       )}
 
       <Icon

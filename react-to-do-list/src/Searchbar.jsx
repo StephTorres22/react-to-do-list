@@ -20,6 +20,7 @@ const SearchBar = ({ onChange, handleSearch, searchBarValue }) => {
         type="text"
         name="searchBar"
         defaultValue={searchBarValue}
+        value={searchBarValue}
         id="searchBar"
         onChange={onChange}
         placeholder="Search"
