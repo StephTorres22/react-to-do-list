@@ -39,7 +39,7 @@ const ToDoCard = ({
           flex: "1 0 auto",
         }}
       >
-        <ul style={{ display: "flex", flex: "1 0 auto" }}>
+        <ul style={{ display: "flex", flex: "1 0 auto", flexDirection: "column"}}>
           {toDo.list.map((item) => {
             return (
               <ListItem

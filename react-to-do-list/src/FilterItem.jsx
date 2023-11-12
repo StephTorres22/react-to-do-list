@@ -6,7 +6,6 @@ function FilteredItem({ item, handleDelete }) {
   return (
     <div>
       {item.map((item) => {
-        console.log(item);
         return (
           <div className="filtered_item" key={item.id}>
             <h3 style={{ textDecoration: "underline" }}>{item.title}</h3>
