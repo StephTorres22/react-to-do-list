@@ -19,7 +19,7 @@ const SearchBar = ({ onChange, handleSearch, searchBarValue }) => {
       <input
         type="text"
         name="searchBar"
-        defaultValue={searchBarValue}
+        /* defaultValue={searchBarValue} */
         value={searchBarValue}
         id="searchBar"
         onChange={onChange}

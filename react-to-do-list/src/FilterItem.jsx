@@ -10,13 +10,21 @@ function FilteredItem({ item, handleDelete }) {
         return (
           <div className="filtered_item" key={item.id}>
             <h3 style={{ textDecoration: "underline" }}>{item.title}</h3>
-            <p>Is complete: {`${item.isComplete}`}</p>
-            <Icon
-              path={mdiDeleteOffOutline}
-              size={1}
-              className="icon"
-              onClick={() => handleDelete(item.id)}
-            ></Icon>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <p>Is complete: {`${item.isComplete}`}</p>
+              <Icon
+                path={mdiDeleteOffOutline}
+                size={1}
+                className="icon"
+                onClick={() => handleDelete(item.id)}
+              ></Icon>
+            </div>
           </div>
         );
       })}

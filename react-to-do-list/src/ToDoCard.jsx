@@ -32,8 +32,14 @@ const ToDoCard = ({
           onClick={() => handleDelete(toDo.id)}
         />
       </div>
-      <div>
-        <ul>
+      <div
+        style={{
+          display: "flex",
+
+          flex: "1 0 auto",
+        }}
+      >
+        <ul style={{ display: "flex", flex: "1 0 auto" }}>
           {toDo.list.map((item) => {
             return (
               <ListItem
