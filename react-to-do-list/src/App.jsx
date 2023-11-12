@@ -7,6 +7,8 @@ import { useState } from "react";
 import ListForm from "./ListForm";
 import { v4 as uuidv4 } from "uuid";
 import ListItem from "./ListItem";
+import ToDoCardDisplay from "./ToDoCardDisply";
+import FilteredItemDisplay from "./FliteredItemDisplay";
 
 function App() {
   const defaultItem = { title: "", id: "", isComplete: false };
@@ -195,7 +197,7 @@ function App() {
         searchBarValue={searchInput}
       />
 
-      <div className="card-display">
+      {/* <div className="card-display">
         {searchInput === ""
           ? toDoList.map((item) => {
               return (
@@ -213,7 +215,19 @@ function App() {
           : searchTaskByTitle(searchInput).map((item) => {
               return <ListItem key={item.id} item={item} />;
             })}
-      </div>
+      </div> */}
+      {searchInput === "" ? (
+        <ToDoCardDisplay
+          toDoList={toDoList}
+          handleDelete={removeToDoList}
+          handleAddItem={addItemToList}
+          handleItemChange={handleItemChange}
+          handleDeleteItem={deleteItemFromList}
+          setItemComplete={setItemComplete}
+        />
+      ) : (
+        <FilteredItemDisplay arr={searchTaskByTitle(searchInput)} />
+      )}
       <h1>Total: {getTotalNumberOfTask() ? getTotalNumberOfTask() : 0}</h1>
       <h1>Total incomplete tasks: {incompleteTasks}</h1>
       <Icon
