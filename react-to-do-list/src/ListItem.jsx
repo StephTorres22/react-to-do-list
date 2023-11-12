@@ -15,7 +15,7 @@ const ListItem = ({ item, handleDelete, handleCheckClick }) => {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        flex: "1 0 auto",
+        
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }}>
