@@ -3,16 +3,18 @@ export function searchTaskByTitle(title, toDoList) {
   toDoList.forEach((toDo) => {
     if (toDo.list.length !== 0) {
       let additions = toDo.list.filter((item) => item.title.includes(title));
-      filteredTasks.push(additions);
+      if (additions.length !== 0) {
+        filteredTasks.push(additions);
+      }
     }
   });
 
   /* this makes sure no empty arrays are passed down/forward, so filtered obj don't appear in weird positions */
-  for (let i = 0; i < filteredTasks.length; i++) {
+  /* for (let i = 0; i < filteredTasks.length; i++) {
     if (filteredTasks[i].length === 0) {
       filteredTasks.splice(filteredTasks.indexOf(filteredTasks[i]), 1);
     }
-  }
+  } */
   console.log(filteredTasks);
   return filteredTasks;
 }
