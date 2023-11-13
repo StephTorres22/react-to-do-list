@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import ToDoCardDisplay from "./ToDoCardDisply";
 import FilteredItemDisplay from "./FilteredItemDisplay";
 import Header from "./Header";
+import * as Functions from "./Functions.js";
 
 function App() {
   const defaultItem = { title: "", id: "", isComplete: false };
@@ -171,31 +172,13 @@ function App() {
 
   const [searchInput, setSearchInput] = useState("");
 
-  function searchTaskByTitle(title) {
-    const filteredTasks = [];
-    toDoList.forEach((toDo) => {
-      if (toDo.list.length !== 0) {
-        let additions = toDo.list.filter((item) => item.title.includes(title));
-        filteredTasks.push(additions);
-      }
-    });
-    console.log(filteredTasks);
-    /* this makes sure no empty arrays are passed down/forward, so filtered obj don't appear in weird positions */
-    for (let i = 0; i < filteredTasks.length; i++) {
-      if (filteredTasks[i].length === 0) {
-        filteredTasks.splice(filteredTasks.indexOf(filteredTasks[i]), 1);
-      }
-    }
-    return filteredTasks;
-  }
-
   /*   function handleSearchBarChange(e) {
     setSearchInput(e.target.value);
   } */
   return (
     <div style={{ width: "100%" }}>
       <Header
-        handleSearch={searchTaskByTitle}
+        handleSearch={Functions.searchTaskByTitle(searchInput, toDoList)}
         onInputChange={(e) => setSearchInput(e.target.value)}
         searchBarValue={searchInput}
         total={getTotalNumberOfTasks()}
@@ -213,7 +196,7 @@ function App() {
         />
       ) : (
         <FilteredItemDisplay
-          arr={searchTaskByTitle(searchInput)}
+          arr={Functions.searchTaskByTitle(searchInput, toDoList)}
           handleDelete={deleteItemFromList}
         />
       )}
