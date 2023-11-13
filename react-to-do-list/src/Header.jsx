@@ -6,21 +6,24 @@ function Header({
   onInputChange,
   searchBarValue,
   incompleteTasks,
-  toDoList
+  total,
 }) {
+  //this doesn't quite work as expected, doesn't update on adding new tasks, does it on new card, or setting task to complete/delete
+  /* const [total, setTotal] = useState("0");
 
-    function getTotalNumberOfTask() {
-        let total = 0;
-        for (let i = 0; i < toDoList.length; i++) {
-          let toDo = toDoList[i];
-    
-          total += toDo.list.length;
-          return total;
-        }
-      }
+  useEffect(() => {
+    let total = 0;
+    for (let i = 0; i < toDoList.length; i++) {
+      let toDo = toDoList[i];
+
+      total += toDo.list.length;
+      setTotal(total);
+    }
+  }, [toDoList]); */
+  //function getTotalNumberOfTask() {}
   return (
     <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <h2>Total: {getTotalNumberOfTask() ? getTotalNumberOfTask() : 0}</h2>
+      <h2>Total number of tasks: {total}</h2>
       <SearchBar
         handleSearch={handleSearch}
         onChange={onInputChange}

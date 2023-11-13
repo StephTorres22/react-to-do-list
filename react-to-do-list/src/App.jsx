@@ -17,6 +17,14 @@ function App() {
   const [item, setItem] = useState(defaultItem);
   const [incompleteTasks, setIncompleteTasks] = useState(0);
 
+  function getTotalNumberOfTasks() {
+    let total = 0;
+    for (let i = 0; i < toDoList.length; i++) {
+      total += toDoList[i].list.length;
+    }
+    return total;
+  }
+
   /* gets 2 things, I know this is bad, but didn't want to re-write a nested for loop 2 times,  */
   function getTargetToDoFromItemID(itemId) {
     for (let i = 0; i < toDoList.length; i++) {
@@ -184,7 +192,7 @@ function App() {
         handleSearch={searchTaskByTitle}
         onInputChange={(e) => setSearchInput(e.target.value)}
         searchBarValue={searchInput}
-        toDoList={toDoList}
+        total={getTotalNumberOfTasks()}
         incompleteTasks={incompleteTasks}
       />
 
